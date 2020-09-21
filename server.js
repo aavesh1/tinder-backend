@@ -71,7 +71,7 @@ app.set('view engine', 'ejs');
                      console.log(err)
                  }
                  else {
-                     res.send(data)
+                     res.redirect("https://aaveshdagar.com/contact.html")
                  }
              } )
           });
