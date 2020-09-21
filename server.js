@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import Cards from './dbcards.js'
+import Fform from './fform.js'
 import Cors from 'cors'
     //App Config
 const app = express();
@@ -56,6 +57,38 @@ app.set('view engine', 'ejs');
             }}
             )
     })
+
+
+        //FORM
+
+        app.post('/fform' , (req , res)=>{
+            const name = req.body.name ;
+            const email = req.body.email ;
+            const msg  = req.body.msg ;
+              
+             Fform.create({name:name , email : email , msg : msg} , (err , data)=>{
+                 if (err) {
+                     console.log(err)
+                 }
+                 else {
+                     res.send(data)
+                 }
+             } )
+          });
+      
+        app.get('/fform' , (req , res)=>{
+
+            Fform.find((err , data)=>{
+                if (err) {
+                    res.status(500).send(err)
+                }
+                else {
+                    res.status(200).send(data)
+                }}
+                )
+
+
+        })
 
 
     //Listener
